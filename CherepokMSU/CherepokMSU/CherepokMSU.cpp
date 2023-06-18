@@ -88,7 +88,6 @@ void TopolEN::generator(int width, int height, int square, int triangle)
 	Nn = (width + 1) * (height + 1);
 }
 
-
 void TopolNE::convertNE(TopolEN& EN)
 {
 	Ne = EN.Ne;
@@ -151,7 +150,6 @@ void vectorPrint(vector<double>& v)
 	cout << endl;
 }
 
-
 void Solver::SLAU(Topol& topol, double eps, int maxit, vector<double>& b, vector<double>& x, int& k, double& res)
 {
 	double time = omp_get_wtime();
@@ -198,7 +196,6 @@ void Solver::SLAU(Topol& topol, double eps, int maxit, vector<double>& b, vector
 	cout << "Time " << totaltime << endl;
 	
 }
-
 
 double Solver::norma(vector<double>& a)
 {
@@ -286,9 +283,9 @@ void fillB(vector<double>& b, int N)
 
 int main(int args, char* argv[])
 {
-	
-	int width = 1000;
-	int height = 1000;
+	omp_set_num_threads(8);
+	int width = 5000;
+	int height = 5000;
 	int square = 5;
 	int triangle = 10;
 
@@ -336,10 +333,13 @@ int main(int args, char* argv[])
 	TopolNE topNE;
 	TopolEN topEN;
 	TopolNeN topNeN;
+	double Ztime = omp_get_wtime();
 	topEN.generator(width, height, square, triangle);
 	topNE.convertNE(topEN);
 	topNeN.conevertNeN(topNE, topEN);
+	cout << "Zapolnenie " << omp_get_wtime() - Ztime << endl;
 	topNeN.fillA();
+
 	vector<double> b;
 	fillB(b, topNeN.Ia.size()-1);
 	vector<double> x(topNeN.Ia.size() - 1, 0);

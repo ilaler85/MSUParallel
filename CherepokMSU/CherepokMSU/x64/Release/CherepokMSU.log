@@ -1,17 +1,21 @@
 ﻿  CherepokMSU.cpp
-C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(142,41): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(143,41): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int
           ]
-C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(216,36): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(217,36): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int
           ]
-C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(332,29): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(218,29): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(239,29): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(256,18): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(267,18): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(347,29): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
   Создание кода
-  2 of 293 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
+  2 of 290 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено

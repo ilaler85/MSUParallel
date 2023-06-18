@@ -13,5 +13,5 @@ C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(218,29): war
 C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(239,29): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(256,18): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(267,18): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(344,29): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(347,29): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
   CherepokMSU.vcxproj -> C:\Users\ivano\source\repos\CherepokMSU\x64\Debug\CherepokMSU.exe
