@@ -1,7 +1,13 @@
 ﻿  CherepokMSU.cpp
-C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(116,41): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(141,41): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int
           ]
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(213,36): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\ivano\source\repos\CherepokMSU\CherepokMSU\CherepokMSU.cpp(328,29): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
   CherepokMSU.vcxproj -> C:\Users\ivano\source\repos\CherepokMSU\x64\Debug\CherepokMSU.exe
