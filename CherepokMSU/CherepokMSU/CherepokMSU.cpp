@@ -5,6 +5,7 @@
 #include <fstream>
 #include <math.h>
 #include "Topolog.h"
+#include <omp.h>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ void Topol::print()
 void Topol::fillA()
 {
 	A.resize(Ja.size());
+#pragma omp parallel for
 	for (int i = 0; i < Ia.size()-1; ++i)
 	{
 		double sum = 0;
@@ -152,8 +154,9 @@ void vectorPrint(vector<double>& v)
 
 void Solver::SLAU(Topol& topol, double eps, int maxit, vector<double>& b, vector<double>& x, int& k, double& res)
 {
+	double time = omp_get_wtime();
+
 	int N = topol.Nn;
-	cout << N << "\t" << topol.Ia.size() - 1 << endl;
 	k = 0;
 	double ro = 0;
 	double roBack = 0;
@@ -191,7 +194,8 @@ void Solver::SLAU(Topol& topol, double eps, int maxit, vector<double>& b, vector
 		res = norma(r);
 		cout << res <<endl;
 	} while ((ro > eps * eps) && (k < maxit));
-	
+	double totaltime = omp_get_wtime()-time;
+	cout << "Time " << totaltime << endl;
 	
 }
 
@@ -211,8 +215,10 @@ void Solver::inverseM(Topol& topol, Topol& M)
 		M.Ja.push_back(i);
 	}
 	M.Ia.push_back(topol.Ia.size() - 1);
-
-	for (int i = 0; i < topol.Ia.size() - 1; ++i)
+	int n = topol.Ia.size() - 1;
+	M.A.assign(n, 0);
+#pragma omp parallel for
+	for (int i = 0; i < n; ++i)
 	{
 		int diag = -1;
 		for (int col = topol.Ia[i]; col < topol.Ia[i + 1]; ++col)
@@ -220,7 +226,7 @@ void Solver::inverseM(Topol& topol, Topol& M)
 			int j = topol.Ja[col];
 			if (i == j)
 			{
-				M.A.push_back(1 / topol.A[col]);
+				M.A[j]= 1 / topol.A[col];
 				break;
 			}
 		}
@@ -230,8 +236,9 @@ void Solver::inverseM(Topol& topol, Topol& M)
 
 void Solver::SpMV(Topol& topol, vector<double>& b, vector<double>& res)
 {
-	
-	for (int i = 0; i < topol.Ia.size()-1; ++i)
+	int n = topol.Ia.size() - 1;
+#pragma omp parallel for schedule(dynamic,1000)
+	for (int i = 0; i < n; ++i)
 	{
 		double localsum = 0;
 		
@@ -246,7 +253,9 @@ void Solver::SpMV(Topol& topol, vector<double>& b, vector<double>& res)
 
 void Solver::axpy(vector<double>& x, vector<double>& y, double alfa, vector<double>& res)
 {
-	for (int i = 0; i < x.size(); ++i)
+	int n = x.size();
+#pragma omp parallel for
+	for (int i = 0; i < n; ++i)
 	{
 		res[i] = x[i] * alfa + y[i];
 	}
@@ -254,25 +263,32 @@ void Solver::axpy(vector<double>& x, vector<double>& y, double alfa, vector<doub
 
 void Solver::dot(vector<double>& a, vector<double>& b, double& res)
 {
-	for (int i = 0; i < a.size(); ++i)
+	double result=0;
+	int n = a.size();
+#pragma omp parallel for reduction(+:result)
+	for (int i = 0; i < n; ++i)
 	{
-		res += a[i] * b[i];
+		result += a[i] * b[i];
 	}
+	res = result;
 }
 
-void fillB(vector<double>& b, int width)
+void fillB(vector<double>& b, int N)
 {
-	for (int i = 0; i < width; ++i)
+	b.assign(N, 0);
+#pragma omp parallel for
+	for (int i = 0; i < N; ++i)
 	{
-		b.push_back(sin(i));
+		b[i] = (sin(i));
 	}
 }
 
 
 int main(int args, char* argv[])
 {
-	int width = 100;
-	int height = 100;
+	
+	int width = 1000;
+	int height = 1000;
 	int square = 5;
 	int triangle = 10;
 
@@ -331,5 +347,6 @@ int main(int args, char* argv[])
 	double res;
 	Solver sol;
 	sol.SLAU(topNeN, eps,maxit,b,x,k,res);
+	
 	//topNeN.print();
 }
